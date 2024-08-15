@@ -59,16 +59,65 @@ describe("<ColorPicker />", () => {
   test("ColorSelector renders initially when isOpen is specified for ColorPicker", () => {
     const { container } = render(<ColorPicker isOpen />)
 
-    const popover = container.querySelectorAll(".ui-popover")
+    const popover = container.querySelector(".ui-popover")
 
-    expect(popover[0]).toBeVisible()
+    expect(popover).toBeVisible()
   })
 
   test("ColorSelector does not render initially when isOpen is not specified for ColorPicker", () => {
     const { container } = render(<ColorPicker />)
 
-    const popover = container.querySelectorAll(".ui-popover")
+    const popover = container.querySelector(".ui-popover")
 
-    expect(popover[0]).not.toBeVisible()
+    expect(popover).not.toBeVisible()
+  })
+
+  test("ColorPickerEyeDropper clones children with correct props", () => {
+    interface CustomIconProps {
+      focusable?: boolean | "true" | "false"
+      "aria-hidden"?: boolean | "true" | "false"
+      style?: React.CSSProperties
+    }
+
+    const CustomIcon: React.FC<CustomIconProps> = ({
+      focusable,
+      "aria-hidden": ariaHidden,
+      style,
+    }) => (
+      <svg
+        data-testid="custom-icon"
+        focusable={focusable}
+        aria-hidden={ariaHidden}
+        style={style}
+      >
+        <path d="M0 0h24v24H0z" />
+      </svg>
+    )
+
+    render(
+      <ColorPicker
+        data-testid="colorPicker"
+        withEyeDropper
+        eyeDropperProps={
+          {
+            children: <CustomIcon />,
+            "data-testid": "eye-dropper",
+          } as any
+        }
+      />,
+    )
+
+    const eyeDropper = screen.getByTestId("eye-dropper")
+    expect(eyeDropper).toBeInTheDocument()
+
+    const customIcon = screen.getByTestId("custom-icon")
+    expect(customIcon).toBeInTheDocument()
+    expect(customIcon).toHaveAttribute("focusable", "false")
+    expect(customIcon).toHaveAttribute("aria-hidden", "true")
+    expect(customIcon).toHaveStyle({
+      maxWidth: "1em",
+      maxHeight: "1em",
+      color: "currentColor",
+    })
   })
 })
