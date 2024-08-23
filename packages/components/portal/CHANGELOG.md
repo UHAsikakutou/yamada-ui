@@ -1,5 +1,12 @@
 # @yamada-ui/portal
 
+## 1.0.19
+
+### Patch Changes
+
+- Updated dependencies [[`613ed7d`](https://github.com/yamada-ui/yamada-ui/commit/613ed7d95268fa48c208e2efdadbd9822884ece1), [`88d682d`](https://github.com/yamada-ui/yamada-ui/commit/88d682da2e3a8fd49ad7eced29ec3609ada9c282), [`d240135`](https://github.com/yamada-ui/yamada-ui/commit/d240135c624336f0ff17c4ef4ea59427320b9221), [`1a81894`](https://github.com/yamada-ui/yamada-ui/commit/1a81894b09df4ca87a7c43009486c7dc04531b57), [`934242e`](https://github.com/yamada-ui/yamada-ui/commit/934242e6dcfa5945bb5bb331c0e6e9c8f680fe25)]:
+  - @yamada-ui/utils@1.4.0
+
 ## 1.0.18
 
 ### Patch Changes
